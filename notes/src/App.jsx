@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from '../src/routes/Routes';
+import "./App.css"
 
 function App() {
   return (
-    <div className='bg-black w-96 h-96'>
-      
-    </div>
-  )
+    <Router>
+      <Routes />
+    </Router>
+  );
 }
 
-export default App
+export default App;
