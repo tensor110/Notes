@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const MuiCard = (props) => {
   return (
     <Box>
-      <Card elevation={3} className='w-80 h-96 flex flex-col justify-between transition duration-1000 ease-in-out transform hover:scale-105 hover:skew-y-3'>
+      <Card elevation={3} className='w-80 h-96 flex flex-col justify-between transition duration-1000 ease-in-out transform hover:scale-[1.01] hover:-translate-y-2'>
         <CardMedia
           component="img"
           image={props.thumbnail}
@@ -15,20 +15,23 @@ const MuiCard = (props) => {
           <Typography gutterBottom variant="h5" component="div">
             {props.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.description}
+          <Typography variant="body2" color="text.secondary" component="div">
+            <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+              {props.description}
+            </pre>
           </Typography>
         </CardContent>
-        <CardActions>.
-            <NavLink to={props.learn_path}>
-          <Button size="small">Learn More</Button>
-            </NavLink>
-            <NavLink to={props.question_path}>
-          <Button size="small">Interview Questions</Button>
+        <CardActions>
+          <NavLink to={props.learn_path}>
+            <Button size="small">Learn More</Button>
+          </NavLink>
+          <NavLink to={props.question_path}>
+            <Button size="small">Interview Questions</Button>
           </NavLink>
         </CardActions>
       </Card>
     </Box>
   );
 };
+
 export default MuiCard;

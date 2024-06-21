@@ -5,8 +5,9 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import JSQuestions from '../data/JSQues'
+import ReactMarkdown from 'react-markdown';
 import { useState } from "react";
+import JSQuestions from '../data/JSQues'
 import Filter from "../components/Filter";
 
 const Questions = () => {
@@ -33,6 +34,12 @@ const Questions = () => {
     ? JSQuestions.filter((item) => item.difficulty === selectedDifficulty)
     : JSQuestions;
 
+  const markdownText = `
+    ![Hoisting Example](https://images.pexels.com/photos/26159411/pexels-photo-26159411/free-photo-of-a-street-with-cars-parked-in-front-of-buildings.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)
+    
+    Here is some text explaining the image.
+  `;
+
   return (
     <>
      <Filter
@@ -46,19 +53,26 @@ const Questions = () => {
         key={index}
         expanded={expanded === index}
         onChange={handleChange(index)}
-        className="m-4"
+        className="m-1"
       >
         <AccordionSummary
           aria-controls={`panel${item.index}-content`}
           id={`panel${item.index}-header`}
           expandIcon={<ExpandMoreIcon />}
+          sx={{
+            bgcolor: 'black',
+            color: 'white',
+          }}
         >
-          <Typography>{item.question}</Typography>
+          <Typography className="bg-black">{item.question}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
+        <AccordionDetails className="bg-gray-700 text-white overflow-x-auto">
+          <Typography component='pre'>
             {item.answer}
           </Typography>
+          <ReactMarkdown style={{display: 'flex'}}>
+            {item.image}
+          </ReactMarkdown>
         </AccordionDetails>
       </Accordion>
       ))
