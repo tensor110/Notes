@@ -7,9 +7,9 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ReactMarkdown from "react-markdown";
 import { useState, useEffect } from "react";
-import JSQuestions from "../data/JSQues";
-import Filter from "../components/Filter";
-import Search from "../components/Search";
+import JSQuestions from "../../data/JSQues";
+import Filter from "../../components/Filter";
+import Search from "../../components/Search";
 
 const Questions = () => {
   const [expanded, setExpanded] = useState(-1);

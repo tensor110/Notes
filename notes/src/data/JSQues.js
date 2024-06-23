@@ -12,7 +12,7 @@ const JSQuestions = [
 • Only the declarations are hoisted, not initializations or assignments
 • let and const declarations are hoisted to the top of their block scope, but they are not initialized until the line where they are declared is reached during execution. This is called the "temporal dead zone".`,
     difficulty: "medium",
-    image: '![Hoisting Example](/hoisting.png)'
+    image: '![Hoisting Example](/javascript/hoisting.png)'
   },
   {
     question: "Difference between “ == “ and “ === “ operators",
@@ -109,7 +109,7 @@ Server-side JavaScript:
     answer: `• Memoization is a form of caching where the return value of a function is cached based on its parameters. If the parameter of that function is not changed, the cached version of the function is returned.
     `,
     difficulty: "hard",
-    image: '![memoriztion](/memorization.png)'
+    image: '![memoriztion](/javascript/memorization.png)'
   },
   {
     question: "What are the types of errors in javascript?",
@@ -121,7 +121,7 @@ Server-side JavaScript:
     answer: `• Callbacks are functions passed into another function as an argument to be executed later.
     • They allow asynchronous operations, like reading files or making API calls, to execute in sequence.`,
     difficulty: "hard",
-    image: '![callback](/callback.png)'
+    image: '![callback](/javascript/callback.png)'
   },
 ];
 

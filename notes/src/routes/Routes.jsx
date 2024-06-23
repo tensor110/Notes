@@ -1,14 +1,18 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Home from '../screens/Home';
-import Learn from '../screens/Learn';
-import Questions from '../screens/Questions'
+import JavascriptLearn from '../screens/javascript/Learn';
+import JavascriptQuestions from '../screens/javascript/Questions'
+import ReactLearn from "../screens/react/Learn"
+import ReactQuestions from "../screens/react/Questions"
 
 function Routes() {
   const routes = useRoutes([
     { path: '/', element: <Home /> },
-    { path: 'learn/javascript', element: <Learn /> },
-    { path: 'questions/javascript', element: <Questions /> },
+    { path: 'learn/javascript', element: <JavascriptLearn /> },
+    { path: 'questions/javascript', element: <JavascriptQuestions /> },
+    { path: 'learn/react', element: <ReactLearn /> },
+    { path: 'questions/react', element: <ReactQuestions /> },
   ]);
 
   return routes;
