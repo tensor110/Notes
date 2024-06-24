@@ -7,6 +7,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ReactMarkdown from "react-markdown";
 import { useState, useEffect } from "react";
+import axios from 'axios'
 import JSQuestions from "../../data/JSQues";
 import Filter from "../../components/Filter";
 import Search from "../../components/Search";
@@ -14,6 +15,7 @@ import AddQuestion from "../../components/AddQuestion";
 import Navbar from '../../components/Navbar'
 
 const Questions = () => {
+  const [questions, setQuestions] = useState([]);
   const [expanded, setExpanded] = useState(-1);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,16 +39,28 @@ const Questions = () => {
     const handleSearchChange = (e) => {
       setSearchQuery(e.target.value);
     };
-
     useEffect(() => {
-      const query = searchQuery.toLowerCase();
-      const filtered = JSQuestions.filter((item) => {
-        const matchesDifficulty = !selectedDifficulty || item.difficulty === selectedDifficulty;
-        const matchesSearchQuery = item.question.toLowerCase().includes(query);
-        return matchesDifficulty && matchesSearchQuery;
-      });
-      setFilteredQuestions(filtered);
-    }, [searchQuery, selectedDifficulty]);
+      const fetchQuestions = async () => {
+        try {
+          const response = await axios.get("http://localhost:3000/questions");
+          setQuestions(response.data);
+        } catch (error) {
+          console.error("Error fetching questions:", error);
+        }
+      };
+  
+      fetchQuestions();
+    }, []);
+
+    // useEffect(() => {
+    //   const query = searchQuery.toLowerCase();
+    //   const filtered = JSQuestions.filter((item) => {
+    //     const matchesDifficulty = !selectedDifficulty || item.difficulty === selectedDifficulty;
+    //     const matchesSearchQuery = item.question.toLowerCase().includes(query);
+    //     return matchesDifficulty && matchesSearchQuery;
+    //   });
+    //   setFilteredQuestions(filtered);
+    // }, [searchQuery, selectedDifficulty]);
 
 
   return (
@@ -61,7 +75,7 @@ const Questions = () => {
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}
       />
-      {filteredQuestions.map((item, index) => (
+      {questions.map((item, index) => (
         <Accordion
           key={index}
           expanded={expanded === index}

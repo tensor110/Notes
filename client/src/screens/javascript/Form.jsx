@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function Form() {
   const { register, handleSubmit, watch } = useForm();
-  const [topic, setTopic] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+  const [topic, setTopic] = useState("javascript");
+  const [difficulty, setDifficulty] = useState("easy");
   const handleTopic = (event) => {
     const value = event.target.value;
     setTopic(value);
@@ -15,8 +16,18 @@ function Form() {
     setDifficulty(value);
     console.log(value);
   };
-  const onSubmit = (data) => {
-    console.log("Form Submitted", data);
+  const onSubmit = async (data) => {
+    try {
+      const formData = {
+        ...data,
+        topic: topic, // Include topic from state
+        difficulty: difficulty, // Include difficulty from state
+      };
+      const response = await axios.post("http://localhost:3000/submit-form", data);
+      console.log("Form Submitted", response.data);
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+    }
   };
 
   // useEffect(()=>{
@@ -29,7 +40,7 @@ function Form() {
   return (
     <div className="flex justify-center items-center bg-black h-screen">
       <form
-        action=""
+        action="post"
         className="flex flex-col justify-center items-center gap-2 w-2/3"
         onSubmit={handleSubmit(onSubmit)}
         >
@@ -39,7 +50,7 @@ function Form() {
           </label>
           <select
             id="topic"
-            {...register("topic")}
+            {...register("topic", { required: true })}
             value={topic}
             onChange={handleTopic}
             className="outline-none w-1/2"
@@ -54,7 +65,7 @@ function Form() {
           </label>
           <select
             id="difficulty"
-            {...register("difficulty")}
+            {...register("difficulty", { required: true })}
             value={difficulty}
             onChange={handleDifficulty}
             className="outline-none w-1/2"
@@ -70,7 +81,7 @@ function Form() {
           </label>
           <input
             type="text"
-            {...register("question")}
+            {...register("question", { required: true })}
             id=""
             placeholder="Question"
             className="text-white font-light bg-gray-500 outline-none px-2 py-1 rounded"
@@ -81,7 +92,7 @@ function Form() {
             Answer
           </label>
           <textarea
-            {...register("answer")}
+            {...register("answer", { required: true })}
             id=""
             placeholder="Answer"
             className="text-white font-light bg-gray-500 outline-none px-2 py-1 rounded overflow-auto"
