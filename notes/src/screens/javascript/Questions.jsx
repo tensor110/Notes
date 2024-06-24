@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 import JSQuestions from "../../data/JSQues";
 import Filter from "../../components/Filter";
 import Search from "../../components/Search";
+import AddQuestion from "../../components/AddQuestion";
+import Navbar from '../../components/Navbar'
 
 const Questions = () => {
   const [expanded, setExpanded] = useState(-1);
@@ -49,6 +51,7 @@ const Questions = () => {
 
   return (
     <>
+      <Navbar />
       <Filter
         onFilter={filterQuestionsByDifficulty}
         onClearFilter={clearFilter}
@@ -84,6 +87,9 @@ const Questions = () => {
           </AccordionDetails>
         </Accordion>
       ))}
+      <div className="absolute bottom-5 right-10 z-20 bg-blue-600 rounded-full">
+        <AddQuestion />
+      </div>
     </>
   );
 };
