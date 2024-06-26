@@ -8,9 +8,9 @@ function Home() {
     <>
       <Navbar />
       <div className="m-8 flex gap-8 flex-wrap justify-center">
-        {CardData.map((item) => (
+        {CardData.map((item, index) => (
           <Card
-            key={item.inedx}
+            key={index}
             thumbnail={item.thumbnail}
             title={item.title}
             description={item.description}

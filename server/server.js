@@ -13,8 +13,12 @@ app.use(bodyParser.json());
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:5173' // Replace with your frontend's origin
+  origin: ['https://notes-alpha-navy.vercel.app'],
+  methods: ['POST', "GET"],
+  credentials: true
 }));
+
+app.use(express.json())
 
 // Serve static files from the 'client/dist' directory
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -58,7 +62,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-mongoose.connect('mongodb://127.0.0.1:27017/questions', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb+srv://tensor110:Lucky123@cluster0.fndmwcf.mongodb.net/questions?retryWrites=true&w=majority&appName=Cluster0&minPoolSize=1&maxPoolSize=100');
