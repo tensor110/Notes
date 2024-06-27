@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: ['https://notes-alpha-navy.vercel.app'],
-  // origin: ['http://localhost:5173'],
+  // origin: ['https://notes-alpha-navy.vercel.app'],
+  origin: ['http://localhost:5173'],
   methods: ['POST', "GET"],
   credentials: true
 }));
@@ -56,7 +56,7 @@ app.get('/questions', async (req, res) => {
 
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.listen(PORT, () => {
