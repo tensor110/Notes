@@ -43,7 +43,7 @@ const Questions = () => {
     useEffect(() => {
       const fetchQuestions = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/questions");
+          const response = await axios.get("https://notes-backend-pearl.vercel.app/questions");
           const data = response.data
           const query = searchQuery.toLowerCase();
           const filtered = data.filter((item) => {

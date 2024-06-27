@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 // Enable CORS for all routes
 app.use(cors({
-  // origin: ['https://notes-alpha-navy.vercel.app'],
-  origin: ['http://localhost:5173'],
+  origin: ['https://notes-alpha-navy.vercel.app'],
+  // origin: ['http://localhost:5173'],
   methods: ['POST', "GET"],
   credentials: true
 }));
@@ -69,7 +69,7 @@ app.listen(PORT, () => {
 // });
 
 try{
-  mongoose.connect('mongodb+srv://tensor110:Lucky123@cluster0.fndmwcf.mongodb.net/questions?retryWrites=true&w=majority&appName=Cluster0&minPoolSize=1&maxPoolSize=100');
+  mongoose.connect('mongodb+srv://tensor110:Lucky123@cluster0.fndmwcf.mongodb.net/questions?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log("Database Connected")
 }
 catch(error){

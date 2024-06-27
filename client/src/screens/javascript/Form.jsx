@@ -23,7 +23,7 @@ function Form() {
         topic: topic, // Include topic from state
         difficulty: difficulty, // Include difficulty from state
       };
-      const response = await axios.post("http://localhost:3000/submit-form", data);
+      const response = await axios.post("https://notes-backend-pearl.vercel.app/submit-form", data);
       console.log("Form Submitted", response.data);
     } catch (error) {
       console.error("There was an error submitting the form!", error);
