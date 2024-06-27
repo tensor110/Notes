@@ -39,29 +39,25 @@ const Questions = () => {
     const handleSearchChange = (e) => {
       setSearchQuery(e.target.value);
     };
+
     useEffect(() => {
       const fetchQuestions = async () => {
         try {
           const response = await axios.get("http://localhost:3000/questions");
-          setQuestions(response.data);
+          const data = response.data
+          const query = searchQuery.toLowerCase();
+          const filtered = data.filter((item) => {
+                const matchesDifficulty = !selectedDifficulty || item.difficulty === selectedDifficulty;
+                const matchesSearchQuery = item.question.toLowerCase().includes(query);
+                return matchesDifficulty && matchesSearchQuery;
+              });
+          setQuestions(filtered);
         } catch (error) {
           console.error("Error fetching questions:", error);
         }
       };
-  
       fetchQuestions();
-    }, []);
-
-    // useEffect(() => {
-    //   const query = searchQuery.toLowerCase();
-    //   const filtered = JSQuestions.filter((item) => {
-    //     const matchesDifficulty = !selectedDifficulty || item.difficulty === selectedDifficulty;
-    //     const matchesSearchQuery = item.question.toLowerCase().includes(query);
-    //     return matchesDifficulty && matchesSearchQuery;
-    //   });
-    //   setFilteredQuestions(filtered);
-    // }, [searchQuery, selectedDifficulty]);
-
+    }, [searchQuery, selectedDifficulty]);
 
   return (
     <>
