@@ -24,6 +24,10 @@ app.use(express.json())
 // Serve static files from the 'client/dist' directory
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+app.get("/", (req,res)=>{
+  res.json("Hello")
+})
+
 // API endpoint for form submission
 app.post('/submit-form', async (req, res) => {
   try {
@@ -37,16 +41,15 @@ app.post('/submit-form', async (req, res) => {
     res.status(200).send('Form submitted successfully!');
   } catch (error) {
     console.error('Error submitting form:', error); // Log the error
-    if (error.name === 'ValidationError') {
-      return res.status(400).send('Validation Error: ' + error.message);
-    }
     res.status(500).send('There was an error submitting the form!');
   }
 });
 
-app.get('/questions', async (req, res) => {
+app.get('/questions/:topic', async (req, res) => {
+  const { topic } = req.params;
+  console.log(topic)
   try {
-    const questions = await questionModel.find({});
+    const questions = await questionModel.find({ topic: topic });;
     res.status(200).json(questions);
   } catch (error) {
     console.error('Error fetching questions:', error);
@@ -62,11 +65,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// mongoose.connect('mongodb://127.0.0.1:27017/questions', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
 try{
   mongoose.connect('mongodb+srv://tensor110:Lucky123@cluster0.fndmwcf.mongodb.net/questions?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true });

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function Form() {
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, reset } = useForm();
   const [topic, setTopic] = useState("javascript");
   const [difficulty, setDifficulty] = useState("easy");
   const handleTopic = (event) => {
@@ -19,24 +19,21 @@ function Form() {
   const onSubmit = async (data) => {
     try {
       const formData = {
-        ...data,
-        topic: topic, // Include topic from state
-        difficulty: difficulty, // Include difficulty from state
+        // ...data,
+        topic: topic,
+        difficulty: difficulty,
+        question: '',
+        answer: ''
       };
-      const response = await axios.post("https://notes-backend-pearl.vercel.app/submit-form", data);
+      // const response = await axios.post("https://notes-backend-pearl.vercel.app/submit-form", data);
+      const response = await axios.post("http://localhost:3000/submit-form", data);
       console.log("Form Submitted", response.data);
+      reset()
     } catch (error) {
       console.error("There was an error submitting the form!", error);
     }
   };
 
-  // useEffect(()=>{
-  //   const subscription = watch((value)=>{
-  //     console.log(value)
-  //   })
-  //   return () => subscription.unsubscribe()
-  // }, [watch])
-  // const watchForm = watch()
   return (
     <div className="flex justify-center items-center bg-black h-screen">
       <form
